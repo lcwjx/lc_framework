@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CusTitleView">
+        <!--标题文字-->
+        <attr name="title_center_text" format="string" localization="suggested" />
+        <!-- 标题文字样式 -->
+        <attr name="title_center_text_appearance" format="reference" />
+        <!--返回键的图标-->
+        <attr name="title_back_src" format="reference" />
+        <!--是否显示返回键-->
+        <attr name="title_back_isShow" format="boolean" />
+        <!--right标题文字-->
+        <attr name="title_right_text" format="string" localization="suggested" />
+        <!-- 右边文字样式 -->
+        <attr name="title_right_text_appearance" format="reference" />
+        <!--left标题文字-->
+        <attr name="title_left_text" format="string" localization="suggested" />
+        <!-- 右边文字样式 -->
+        <attr name="title_left_text_appearance" format="reference" />
+
+    </declare-styleable>
+</resources>
