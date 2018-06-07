@@ -1,4 +1,4 @@
-package com.hope.http.utils;
+package com.framework.http.utils;
 
 import android.text.TextUtils;
 
