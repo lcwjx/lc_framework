@@ -29,6 +29,9 @@ import com.framework.utils.StatusBarUtils;
 import com.framework.wiget.dialog.BlueDotLoadingDialog;
 import com.framework.wiget.dialog.manager.CmnDialogManager;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
 import butterknife.Unbinder;
 
 /**
@@ -58,7 +61,12 @@ public class BaseActivity extends RxAppCompatActivity implements MvpView, BaseFr
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+//        Realm.init(this);
+//        RealmConfiguration config = new RealmConfiguration.Builder()
+//                .name("myRealm.realm")
+//                .deleteRealmIfMigrationNeeded()
+//                .build();
+//        Realm.setDefaultConfiguration(config);
     }
 
     @Override

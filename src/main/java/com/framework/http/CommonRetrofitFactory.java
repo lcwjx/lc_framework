@@ -39,7 +39,7 @@ public class CommonRetrofitFactory {
      */
     private static String BASE_API_URL;
     /**
-     * box base url.
+     * instance
      */
     private static CommonRetrofitFactory INSTANCE;
     /**
@@ -137,18 +137,6 @@ public class CommonRetrofitFactory {
      * @return 接口
      */
     public <T> T getService(Class<T> serviceClass) {
-        return getService(serviceClass, true);
-    }
-
-    /**
-     * 获取接口管理.
-     *
-     * @param <T>          接口类型
-     * @param serviceClass 接口 class
-     * @param https        是否是https
-     * @return 接口
-     */
-    public <T> T getService(Class<T> serviceClass, boolean https) {
         if (cacheService.containsKey(serviceClass)) {
             return (T) cacheService.get(serviceClass);
         } else {

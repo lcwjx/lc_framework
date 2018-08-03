@@ -3,6 +3,8 @@ package com.framework.http.utils;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
+import com.framework.constant.RequestParamsConstant;
+import com.framework.utils.DeviceUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -23,6 +25,9 @@ import okhttp3.RequestBody;
  */
 public class ParamsUtils {
 
+    public static final String JAVA_VERSION = "1.0.0";//后台的版本，和前端无关
+    public static final String APP_ID = "11";//后台的版本，和前端无关
+
 
     /**
      * map转换为json.
@@ -40,7 +45,7 @@ public class ParamsUtils {
         map.put("method", method);
         map.put("version", "1");
         map.put("params", params);
-        map.put("deviceId", "dfdsfdsfsfd");
+        map.put("deviceId", "865383039836972");
         map.put("appId", "11");
         return map;
     }
@@ -107,7 +112,6 @@ public class ParamsUtils {
     }
 
     /**
-     *
      * @param filedMap
      * @param api
      * @param method
@@ -138,7 +142,26 @@ public class ParamsUtils {
         if (!urlBuilder.toString().equals("")) {
             paramUrl = urlBuilder.toString().replaceFirst("&", "?");
         }
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/x-www-form-urlencoded;charset=UTF-8"), paramUrl);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), paramUrl);
         return requestBody;
+    }
+
+    /**
+     *
+     * @param filedMap
+     * @param api
+     * @param method
+     * @return
+     */
+    public static Map<String, String> packParams(HashMap<String, Object> filedMap, String api, String method) {
+        String params = JSON.toJSONString(filedMap);
+        Map<String, String> mainFiledMap = new HashMap<>();
+        mainFiledMap.put(RequestParamsConstant.BaseParamsKey.API, api);
+        mainFiledMap.put(RequestParamsConstant.BaseParamsKey.METHOD, method);
+        mainFiledMap.put(RequestParamsConstant.BaseParamsKey.VERSION, JAVA_VERSION);
+        mainFiledMap.put(RequestParamsConstant.BaseParamsKey.PARAMS, params);
+        mainFiledMap.put(RequestParamsConstant.BaseParamsKey.DEVICE_ID, DeviceUtils.getAndroidID());
+        mainFiledMap.put(RequestParamsConstant.BaseParamsKey.APP_ID, APP_ID);
+        return mainFiledMap;
     }
 }
