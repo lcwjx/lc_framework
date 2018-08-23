@@ -46,6 +46,10 @@ public class CommonRetrofitFactory {
      * 接口管理缓存
      */
     private Map<Class, Object> cacheService;
+    /**
+     * 请求头
+     */
+    private Map<String, Object> headerMaps = new HashMap();
     private OkHttpClient.Builder okHttpClientBuilder;
     private HttpLoggingInterceptor httpLoggingInterceptor;
 
@@ -65,6 +69,7 @@ public class CommonRetrofitFactory {
             }
         })
                 .addInterceptor(httpLoggingInterceptor)
+                .addInterceptor(new HeaderInterceptor(this.headerMaps))
                 .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(TIMEOUT, TimeUnit.SECONDS);
         LogUtils.getConfig().setLogSwitch(AppUtils.isDebug());
@@ -149,6 +154,7 @@ public class CommonRetrofitFactory {
                 }
             })
                     .addInterceptor(httpLoggingInterceptor)
+                    .addInterceptor(new HeaderInterceptor(this.headerMaps))
                     .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
                     .readTimeout(TIMEOUT, TimeUnit.SECONDS);
 
@@ -161,5 +167,10 @@ public class CommonRetrofitFactory {
             cacheService.put(serviceClass, t);
             return t;
         }
+    }
+
+    public CommonRetrofitFactory addHeaders(Map<String, Object> headerMaps) {
+        this.headerMaps = headerMaps;
+        return this;
     }
 }

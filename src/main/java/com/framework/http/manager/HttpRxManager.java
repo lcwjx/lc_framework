@@ -2,6 +2,7 @@ package com.framework.http.manager;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import io.reactivex.disposables.Disposable;
 
@@ -31,7 +32,7 @@ public class HttpRxManager {
     /**
      * 保存当前请求
      *
-     * @param tag 请求标识
+     * @param tag        请求标识
      * @param disposable the disposable
      */
     public void put(Object tag, Disposable disposable) {
@@ -66,5 +67,17 @@ public class HttpRxManager {
             }
         }
         tagMap.remove(tag);
+    }
+
+    /**
+     * 取消所有请求
+     */
+    public void cancelAll() {
+        Set<Object> keySet = tagMap.keySet();
+        for (Object key : keySet) {
+            Disposable disposable = tagMap.get(key);
+            disposable.dispose();
+        }
+        tagMap.clear();
     }
 }
