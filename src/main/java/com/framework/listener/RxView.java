@@ -4,8 +4,6 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.framework.listener.RxClickListener;
-
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -27,7 +25,7 @@ public class RxView {
   @NonNull
   public static void setOnClick(@NonNull View view, final RxClickListener observer) {
     new ViewClickObservable(view).throttleFirst(delay_click, TimeUnit.MILLISECONDS)
-            .subscribe(new BaseRxBinddingObserver<Object>(view) {
+            .subscribe(new BaseRxBindingObserver<Object>(view) {
               @Override
               protected void onClick(View t) {
                 observer.onClick(t);
@@ -44,11 +42,11 @@ public class RxView {
     return new ViewClickObservable(view).throttleFirst(delay_click, TimeUnit.MILLISECONDS);
   }
 
-  public abstract static class BaseRxBinddingObserver<T> implements Observer<T> {
+  public abstract static class BaseRxBindingObserver<T> implements Observer<T> {
 
     private View view;
 
-    protected BaseRxBinddingObserver(View view) {
+    protected BaseRxBindingObserver(View view) {
       this.view = view;
     }
 

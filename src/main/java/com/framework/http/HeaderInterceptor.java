@@ -28,7 +28,7 @@ public class HeaderInterceptor implements Interceptor {
 
             while (var3.hasNext()) {
                 Map.Entry<String, Object> entry = (Map.Entry) var3.next();
-                request.addHeader((String) entry.getKey(), (String) entry.getValue());
+                request.addHeader(entry.getKey(), (String) entry.getValue());
             }
         }
 
